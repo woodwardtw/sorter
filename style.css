@@ -1,0 +1,141 @@
+    div {
+        transition: background-color .4s;
+    }
+ 
+   .row h1 {
+        font-size: 2em;
+        color: #337ab7;
+        font-weight: 200;
+        margin-top:0;
+        display: inline-block;
+    }
+
+    h4 {
+        font-size: 1.5em;
+        font-weight: 200;
+    }
+    .row {
+        margin: auto;
+    }
+
+    .ui-draggable-dragging {
+        background-color: #337ab7 !important;
+        color: #fff !important;
+        z-index: 1000;
+    }
+    
+    a {     
+      -o-transition:.5s;
+      -ms-transition:.5s;
+      -moz-transition:.5s;
+      -webkit-transition:.5s;
+      transition:.5s;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+    
+    .focus {
+        font-size: .8em;
+        color: #424242;
+        padding: 2px;
+    }
+
+    hr {
+      margin-top: 0px;
+      margin-bottom: 10px;
+      color: #424242;
+    }
+
+   
+    .bar {
+        border-bottom: 5px solid #337ab7;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .logo {
+        max-height: 140px;
+        max-width: 140px;
+        overflow: hidden;
+    }
+
+    input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], select, textarea, .field {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+    margin-bottom: 14px;
+    font-size: 1em;
+    color: #323944;
+    border-radius: 0px;
+    vertical-align: middle;
+    box-shadow: none;
+    border: 0;
+    width: 100%;
+    font-family: "Karla", sans-serif;
+    background-color: #eaedf2;
+    -webkit-transition: background-color 0.24s ease-in-out;
+    transition: background-color 0.24s ease-in-out;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.var {
+    font-size: 30px;
+    text-align: left;
+    display: inline-block;
+    width: 70%;
+    vertical-align: text-top;
+}
+
+.lead {
+    color: #424242;
+    font-size: 30px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+    width: 30%;
+    vertical-align: text-top;
+}
+
+.button {
+    padding: 5px 10px;
+    border: 1px solid #337ab7;
+    width: 300px;
+    margin:auto;
+}
+
+.button:hover {
+    background-color: #efefef;
+}
+
+.drop {
+    height: 250px;
+    border: 1px solid black;
+    display: inline-flex;
+    z-index: 0;
+    padding: 15px;
+}
+
+[class*="col-"] {
+    background-clip: padding-box;
+    border: 10px solid transparent;
+}
+.drag {
+    padding: 10px;
+    z-index: 100;
+    display: inline-flex;
+    font-size: 1.4em;
+    text-align: center;
+    margin: 5px;
+}
+
+.btn-primary {
+    display: inline-block;
+    float:right;
+}
+
+#shuffle {
+    margin-right: 10px; 
+}

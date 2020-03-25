@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>polygot</title>
+    <meta name="generator" content="SUBLIME" />
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <link rel="stylesheet" href="style.css?ver=2.2">
+<!--    <script src="js/Sortable.min.js"></script>-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha256-c3RzsUWg+y2XljunEQS0LqWdQ04X1D3j22fd/8JCAKw=" crossorigin="anonymous"></script>
+
+      <script type="text/javascript"> 
+      var docId = getQueryVariable("docId");
+      console.log(docId);               
+
+         var url = "https://spreadsheets.google.com/feeds/list/"+ docId +"/1/public/values?alt=json";
+
+        $.getJSON(url, function(data) {
+
+          var html = '';
+          var entry = data.feed.entry;
+          var upperLimit = entry.length;
+          var categoryDest =[]; //hold destination array
+          
+          //get words 
+          var i = 0;
+          while (i < upperLimit) {
+            var sticky = "";
+
+            if (entry[i]['gsx$categories']['$t']!=""){
+                categoryDest.push(entry[i]['gsx$categories']['$t']);
+            }
+            // add class element to 'sticky' drag items
+            if (entry[i]['gsx$sticky']['$t']!="") {
+                sticky = entry[i]['gsx$sticky']['$t'];
+                html = '<div class="drag item ui-widget-content '+ sticky +'" id="item'+ i +'">' + entry[i]['gsx$wordsphraseshtml']['$t'] + '</div>';  
+                $('.words').append(html);
+                    $( function() {
+                        $( "#item"+i ).draggable( {revert: "invalid",} );
+                      } 
+                );
+
+                 i++;
+            } 
+            //regular drag items
+            else {
+             html = '<div class="drag item ui-widget-content '+ sticky +'" id="item'+ i +'">' + entry[i]['gsx$wordsphraseshtml']['$t'] + '</div>';  
+            
+            $('.words').append(html);
+            $( function() {
+                $( "#item"+i ).draggable();
+
+              } );
+             i++;
+          }
+
+        }
+        
+        //make drop zones if needed
+            var dropZones = unique(categoryDest);
+            var zoneLength = dropZones.length;
+            var z = 0;
+            
+            while (z < zoneLength){
+            drop = '<div class="drop ' + dropZones[z] + ' col-md-' + zoneSize(zoneLength) + ' col-sm-12 well well-lg" id="' + dropZones[z] + '"><h2>'+ dropZones[z] +'</h2></div>'
+            $('.destination').append(drop); 
+            if (sticky !=""){
+                $('#'+dropZones[z]).droppable({ accept: '.'+dropZones[z]});  //if sticky is set apply to destinations
+            }
+            z++;
+            }                
+        });
+
+
+        //function to get unique from array
+        function unique(array){
+            return array.filter(function(el, index, arr) {
+                return index === arr.indexOf(el);
+            });
+        }
+
+        function zoneSize(number){
+            if (number<4){
+                return 12/number
+            } else {
+                return 4
+            }
+        }
+
+            function getQueryVariable(variable)
+                {
+                       var query = window.location.search.substring(1);
+                       var vars = query.split("&");
+                       for (var i=0;i<vars.length;i++) {
+                               var pair = vars[i].split("=");
+                               if(pair[0] == variable){return pair[1];}
+                       }
+                       return(false);
+                }
+
+  </script>
+</head>
+
+
+
+<body id="all">
+    <div class="container-fluid">
+        <div class="row bar">
+            <div class="col-md-12 col-sm-12">
+                <h1>Playing with Words</h1><!-- HEADER -->
+                <button id="save_image_locally" class="btn btn-primary">download your sort</button>
+                <button id="shuffle" class="btn btn-primary">shuffle words</button>
+
+            </div>                        
+      </div>  
+
+<div class="row">
+<div id="raw-words" class="words col-md-12 col-sm-12"></div>
+</div>
+
+<div id="word-holder" class="row destination">
+</div>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
